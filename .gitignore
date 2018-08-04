@@ -1,6 +1,12 @@
+# Basic gitignores
+**/*.properties
+**/*.ini
+**/*.config 
+**/*.props
+
 # Compiled files
-*.tfstate
-*.tfstate.backup
+**/*.tfstate
+**/*.tfstate.backup
 
 # Module directory
-.terraform/
+terraform/.terraform/
