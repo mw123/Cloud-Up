@@ -5,7 +5,7 @@ define blueprints here
 
 @author: runshengsong
 '''
-from flask import Flask
+from flask import Flask, render_template
 
 from .mnist import blueprint as mnist_blueprint
 from .InceptionV3 import blueprint as incept_blueprint
@@ -19,7 +19,7 @@ app.register_blueprint(tasks_blueprint, url_prefix='/tasks')
 
 @app.route('/')
 def index():
-    return 'Welcome to Michaniki'
+    return render_template('home.html')#'Welcome to Michaniki'
 
 @app.route('/add')
 def add_a():
