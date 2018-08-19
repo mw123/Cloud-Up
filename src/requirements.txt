@@ -47,6 +47,7 @@ Jinja2==2.10
 jmespath==0.9.3
 jupyter-client==5.2.3
 jupyter-core==4.4.0
+Keras==1.2.2
 kiwisolver==1.0.1
 Markdown==2.6.11
 MarkupSafe==1.0
@@ -84,6 +85,7 @@ singledispatch==3.4.0.3
 six==1.11.0
 subprocess32==3.5.1
 tensorboard==1.8.0
+tensorflow==1.5.0
 termcolor==1.1.0
 tornado==5.0.2
 traitlets==4.3.2
