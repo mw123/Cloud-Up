@@ -1,6 +1,5 @@
 # Basic gitignores
 **/*.properties
-**/*.ini
 **/*.config 
 **/*.props
 **/*.pyc
