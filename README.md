@@ -1,4 +1,4 @@
-# server-fail-tolerant-image-transfer-learning
+# Cloud-Up: Scalable and Secure Infrastructure for Transfer Learning as a Service
 - This repo builds on another project called [Michaniki](https://github.com/InsightDataCommunity/Michaniki), which implemented a web platform that enables automated image classification transfer learning service. 
 
 ### Project Idea
