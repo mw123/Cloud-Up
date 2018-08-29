@@ -1,26 +1,31 @@
 # Cloud-Up: Scalable and Secure Infrastructure for Transfer Learning as a Service
-- This repo builds on another project called [Michaniki](https://github.com/InsightDataCommunity/Michaniki), which implemented a web platform that enables automated image classification transfer learning service. 
-
-### Project Idea
-In this repo, I will enable GPU computing on AWS for training on images and implement automatic recovery mechanism to support EC2 Spot Instances for lower costs.
+Checkout my product in this [link.](http://cloud-up-insight.com/) This web app lets you to train your own image classifiers!
 
 ### Purpose
-[Michaniki](https://github.com/InsightDataCommunity/Michaniki) provides three functionalities:
-1. User inputs an image via client application, an Inference Server outputs image class.
-2. User inputs an image dataset stored on a S3 server, a Training Server applies transfer learning on pre-trained CNN models and returns the new model trained on custom images
+The old Michaniki project runs on local host machine. This can be a limiting factor for users who don't have access to GPU enabled computer, thus will suffer from long training times. In this repo, I enable GPU computing on AWS for training classification models. I also deploy a scalable infrastructure to provide multi-user service platform.
+
+This platform is intended for computer vision research and personal use. Transfer learning in image classification has become a standard practice, and a web platform that automates the task can benefit users who do not have computing resource or domain knowledge. 
+
+### Web App Architecture
+![](img/architecture.png)
+
+### System Infrastructure
+![](img/infrastructure.png)
+
+### Dataflows
+1. User inputs images via client application, an Inference Server outputs image class.
+![](img/dataflow-inf.png)
+2. User inputs image dataset stored on S3, a Training Server applies transfer learning on pre-trained CNN models and returns the new model trained on custom images
+![](img/dataflow-train.png)
 3. User inputs testing images stored on S3, and Inference Server outputs predictions using newly trained model.
 
-This platform is intended for computer vision research and personal use. Transfer learning in image classification has become a standard practice, and a web platform that automates the task can save every user 1-2 hours writing basic code that are more similar than not. 
-
-However, this platform currently uses local CPU resources for training, which can be time assuming especially if the dataset is large. I will enable training on GPU by instantiating multiple AWS EC2's while ensuring auto-scaling of resources. This upgrade would speed up training significantly. \#TODO: measure real-time speedup
-
-On-Demand EC2 Instances with GPU are expensive, and this cost can be reduced up to 4x by using EC2 Spot services. The problem with EC2 Spot Instances is that servers are more prone to be interrupted, possibly causing training process to be aborted unexpectedly. Thus a fault-tolerant platform is required. I will implement automatic recovery for the Training Server that will store and pick up previous checkpoints to resume training in cases of cloud server failure.
-
-### Architecture
-![](architecture.png)
-
 ### Tools/Technologies
-- Docker
-- Kubernetes
-- Celery
-- Keras+Tensorflow
+Containerization: Docker
+Orchestration: ECS
+Provisioning: Terraform
+Application: Flask
+
+### Credit
+This repo built upon [Michaniki](https://github.com/InsightDataCommunity/Michaniki), which provided the main features on the application level, including image classification and transfer learning. However, Michaniki ran on local host machine, which is both resource intensive and time consuming, especially if training on a large dataset. 
+
+My contributions include automatic deployment of the application on AWS, auto scaling for efficient resource management, and building web UI for visual appeal and ease of use.
