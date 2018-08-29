@@ -20,10 +20,10 @@ This platform is intended for computer vision research and personal use. Transfe
 3. User inputs testing images stored on S3, and Inference Server outputs predictions using newly trained model.
 
 ### Tools/Technologies
-Containerization: Docker
-Orchestration: ECS
-Provisioning: Terraform
-Application: Flask
+Containerization: Docker  
+Orchestration: ECS  
+Provisioning: Terraform  
+Application: Flask  
 
 ### Credit
 This repo built upon [Michaniki](https://github.com/InsightDataCommunity/Michaniki), which provided the main features on the application level, including image classification and transfer learning. However, Michaniki ran on local host machine, which is both resource intensive and time consuming, especially if training on a large dataset. 
