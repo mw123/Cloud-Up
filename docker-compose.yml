@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  michaniki_client:
+  cloudup_client:
     build: ./src
     ports:
       - "3031:3031"
@@ -11,48 +11,44 @@ services:
       - FLASK_DEBUG=1
       - REDIS_URL="redis://redis"
       - REDIS_PORT=6379
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - DB_HOST=db.cloud-up-insight.com
+      - DB_USER=root
+      - DB_PASSWORD=cloudupusers
+      - DB_NAME=cloudupdb
     volumes:
       - ./src:/opt/src
-    command: ./entryPoint.sh
+    command: >
+      bash -c "./entryPoint.sh
+      && mysql --host db.cloud-up-insight.com --port 3306 -u root -pcloudupusers -c "USE cloudupdb;""
     depends_on:
       - redis
     networks:
-      - michaniki
+      - cloud-up
 
   inference_server:
     build: ./src
     environment:
       - REDIS_URL="redis://redis"
       - REDIS_PORT=6379
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     command: ['python', 'app/models/InceptionV3/inception_inference_server.py']
     volumes:
       - ./src:/opt/src
     networks:
-      - michaniki
+      - cloud-up
     depends_on:
-      - michaniki_client
+      - cloudup_client
       - redis
   
   celery_worker:
     build: ./src
-    command: ['celery', '-A', 'app.celeryapp:michaniki_celery_app', 'worker', '-l', 'info']
+    command: ['celery', '-A', 'app.celeryapp:cloudup_celery_app', 'worker', '-l', 'info']
     volumes:
       - ./src:/opt/src
     networks:
-      - michaniki
+      - cloud-up
     depends_on:
-      - michaniki_client
+      - cloudup_client
     environment:
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - DB_HOST=db
-      - DB_USERNAME=root
-      - DB_PASSWORD=michaniki
-      - DB_NAME=michanikidb
       - BROKER_URL=redis://redis:6379/0
   
   redis:
@@ -60,8 +56,8 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
     hostname: redis
     networks:
-      - michaniki
+      - cloud-up
         
 networks:
-    michaniki:
+    cloud-up:
     

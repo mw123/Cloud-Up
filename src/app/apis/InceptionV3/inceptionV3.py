@@ -31,7 +31,7 @@ import API_helpers
 from app import app
 from app import db
 
-# michaniki app
+# cloudup app
 from ...tasks import *
 
 # temp folder save image files downloaded from S3

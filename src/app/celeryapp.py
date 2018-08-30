@@ -6,11 +6,11 @@ from . import app
 BROKER_URL = app.config['BROKER_URL']
 BACKEND_URL=app.config['BACKEND_URL']
 
-michaniki_celery_app = celery.Celery('app', 
+cloudup_celery_app = celery.Celery('app', 
                                      broker=BROKER_URL,
                                      backend=BACKEND_URL,
                                      include='app.tasks')
 
 if __name__ == '__main__':
-    michaniki_celery_app.start()
+    cloudup_celery_app.start()
     

@@ -1,0 +1,10 @@
+.container {
+  max-width: 960px;
+}
+
+.lh-condensed { line-height: 1.25; }
+
+.help-inline .text-muted{
+  font-size: 10px;
+  line-height: auto;
+}

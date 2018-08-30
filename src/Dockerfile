@@ -1,5 +1,8 @@
 FROM continuumio/miniconda:4.4.10
 
+ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
+
 # utils
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 

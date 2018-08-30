@@ -1,8 +1,8 @@
 from flask import jsonify
 from flask import Blueprint, request
 
-# michaniki async app
-from ...celeryapp import michaniki_celery_app
+# cloudup async app
+from ...celeryapp import cloudup_celery_app
 
 blueprint = Blueprint('remote_tasks', __name__)
 
@@ -15,7 +15,7 @@ def task_info():
     task_results = []
     
     for each_id in task_ids:
-        this_task = michaniki_celery_app.AsyncResult(each_id)
+        this_task = cloudup_celery_app.AsyncResult(each_id)
         this_status = str(this_task.state)
         
         if this_status == "SUCCESS":
@@ -42,7 +42,7 @@ def task_info():
 @blueprint.route('/cancel', methods=['GET'])
 def cancel_task():
     task_id = request.args.get('remote_task_id')
-    michaniki_celery_app.control.revoke(task_id, terminate=True)
+    cloudup_celery_app.control.revoke(task_id, terminate=True)
     
     return jsonify(
         {

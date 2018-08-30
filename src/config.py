@@ -14,11 +14,11 @@ INV3_TRANSFER_BATCH_SIZE = env.str('INV3_TRANSFER_BATCH_SIZE', default=2)
 
 # setting for mysql db
 # parsed from environment variables
-DB_HOST = env.str('DB_HOST', default='127.0.0.1')
-DB_PORT = env.int('DB_PORT', default=3306)
-DB_USERNAME = env.str('DB_USERNAME', default='root')
-DB_PASSWORD = env.str('DB_PASSWORD', default='michaniki')
-DB_NAME = env.str('DB_NAME', default='michanikidb')
+MYSQL_HOST = env.str('DB_HOST', default='db.cloud-up-insight.com')
+MYSQL_USER = env.str('DB_USER', default='root')
+MYSQL_PASSWORD = env.str('DB_PASSWORD', default='cloudupusers')
+MYSQL_DB = env.str('DB_NAME', default='cloudupdb')
+MYSQL_CURSORCLASS = 'DictCursor'
 
 # redis url for celery
 BROKER_URL = env.str('BROKER_URL', default='redis://redis:6379/0')

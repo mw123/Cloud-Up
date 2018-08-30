@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import absolute_import
 
-from .celeryapp import michaniki_celery_app
+from .celeryapp import cloudup_celery_app
 
 import os
 import time
@@ -21,7 +21,7 @@ INCEPTIONV3_IMAGE_QUEUE = app.config['INCEPTIONV3_IMAGE_QUEUE']
 INCEPTIONV3_TOPLESS_MODEL_PATH = app.config['INCEPTIONV3_TOPLESS_MODEL_PATH']
 TEMP_FOLDER = os.path.join('./tmp')
 
-@michaniki_celery_app.task()
+@cloudup_celery_app.task()
 def async_retrain(model_name,
                   s3_bucket_name,
                   s3_bucket_prefix,
@@ -64,7 +64,7 @@ def async_retrain(model_name,
         shutil.rmtree(image_data_path, ignore_errors=True)
         raise
     
-@michaniki_celery_app.task()
+@cloudup_celery_app.task()
 def async_transfer(model_name,
                 s3_bucket_name,
                 s3_bucket_prefix,
