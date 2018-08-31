@@ -52,7 +52,7 @@ def login():
 
             # Compare passwords
             if sha256_crypt.verify(password_candidate, password):
-                app.logger.info('login success: {};{}'.format(email, data['username']))
+                #app.logger.info('login success: {};{}'.format(email, data['username']))
 
                 session['logged_in'] = True
                 session['email'] = email
@@ -63,7 +63,7 @@ def login():
                 flash('You are now logged in', 'success')
                 return redirect(url_for('user_home'))
             else:
-                app.logger.info('wrong password: {}'.format(email))
+                #app.logger.info('wrong password: {}'.format(email))
                 
                 error = 'Authentication failed'
                 return render_template('login.html', error=error)
@@ -94,7 +94,7 @@ def register():
         aws_access_key_id = form.aws_access_key_id.data
         aws_secret_access_key = form.aws_secret_access_key.data
 
-        app.logger.info('register info: {};{}'.format(email, username))
+        #app.logger.info('register info: {};{}'.format(email, username))
         
         # Create cursor
         cur = mysql.connection.cursor()
@@ -106,7 +106,7 @@ def register():
 
         cur.close()
 
-        app.logger.info('register success')
+        #app.logger.info('register success')
         flash('You are now registered', 'success')
 
         return redirect(url_for('index'))
