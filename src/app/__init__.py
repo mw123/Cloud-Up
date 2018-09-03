@@ -13,7 +13,7 @@ pool = redis.ConnectionPool(host='redis', port=6379, db=0)
 db = redis.Redis(connection_pool=pool)
 
 app.config.from_object('config')
-
+'''
 log_path = os.path.join("./logs")
 try:
     os.makedirs(log_path)
@@ -56,5 +56,5 @@ def exceptions(e):
                   request.full_path,
                   tb)
     return "Internal Server Error", 500
-
+'''
 from apis import *
