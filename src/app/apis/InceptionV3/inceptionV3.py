@@ -168,9 +168,8 @@ def init_new_model():
         "task_id": this_id,
         "status": "Transfer Learning and Fine-Tuning are Initiated"
     }), 200
-    
-@blueprint.route('/predict', methods=['POST'])
-def run_inceptionV3():
+
+def run_inceptionV3(image_path):
     """
     Run the pre-trained base Inception V3 model 
     and send image to queue
@@ -181,11 +180,10 @@ def run_inceptionV3():
     data = {"success": False}
     
     # load model name
-    model_name = request.form.get('model_name')
+    model_name = 'base'#request.form.get('model_name')
 
     # load and pre-processing image
-    img = request.files['image']
-    img = image.load_img(img, target_size = (299, 299))
+    img = image.load_img(image_path, target_size = (299, 299))
     x = np.expand_dims(image.img_to_array(img), axis=0)
     x = preprocess_input(x)
     x = x.copy(order="C")
@@ -216,9 +214,7 @@ def run_inceptionV3():
         
         data['success'] = True
         
-    return jsonify({
-        "data": data
-        }), 200
+    return data
         
     
     

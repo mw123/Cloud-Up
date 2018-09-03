@@ -1,6 +1,6 @@
 {% from "includes/_signup_helpers.html" import render_field %}
 <form class="form-signin" method="POST" action="">
-            <img class="mb-4 rounded mx-auto d-block" src="{{ url_for('static', filename='img/cloud-up.jpg') }}" alt="" width="72" height="85">
+            <img class="my-4 rounded mx-auto d-block" src="{{ url_for('static', filename='img/cloud-up.jpg') }}" alt="" width="72" height="85">
             <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
             <div class="form-group">
               {{render_field(form.email, class_="form-control")}}

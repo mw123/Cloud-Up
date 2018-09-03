@@ -14,7 +14,6 @@ db = redis.Redis(connection_pool=pool)
 
 app.config.from_object('config')
 
-print(os.getcwd())
 log_path = os.path.join("./logs")
 try:
     os.makedirs(log_path)

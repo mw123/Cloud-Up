@@ -106,7 +106,7 @@ class inceptionV3_infernece_server:
                         # generate probability of top classes
                         for (label, prob) in each_result:
                             r = {"label": label,
-                                 "probability": float(prob)}
+                                 "probability": "{:.3f}".format(prob)}
                             
                             this_output.append(r)
                         
