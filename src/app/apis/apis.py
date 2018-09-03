@@ -56,8 +56,8 @@ def login():
 
             # Compare passwords
             if sha256_crypt.verify(password_candidate, password):
-                #app.logger.info('login success: {};{}'.format(email, data['username']))
-
+                cur.close()
+                
                 session['logged_in'] = True
                 session['email'] = email
                 session['username'] = data['username']
@@ -65,6 +65,8 @@ def login():
                 session['aws_secret_access_key'] = data['aws_secret_access_key']
 
                 flash('You are now logged in', 'success')
+                #app.logger.info('login success: {};{}'.format(email, data['username']))
+
                 return redirect(url_for('user_home'))
             else:
                 #app.logger.info('wrong password: {}'.format(email))
@@ -120,9 +122,15 @@ def register():
         cur.close()
 
         #app.logger.info('register success')
+        session['logged_in'] = True
+        session['email'] = email
+        session['username'] = username
+        session['aws_access_key_id'] = aws_access_key_id
+        session['aws_secret_access_key'] = aws_secret_access_key
+
         flash('You are now registered', 'success')
 
-        return redirect(url_for('index'))
+        return redirect(url_for('user_home'))
     return render_template('register.html', form=form)
 
 @app.route('/dashboard', methods=['GET', 'POST'])
