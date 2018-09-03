@@ -169,7 +169,7 @@ def init_new_model():
         "status": "Transfer Learning and Fine-Tuning are Initiated"
     }), 200
 
-def run_inceptionV3(image_path):
+def run_inceptionV3():
     """
     Run the pre-trained base Inception V3 model 
     and send image to queue
@@ -183,7 +183,8 @@ def run_inceptionV3(image_path):
     model_name = 'base'#request.form.get('model_name')
 
     # load and pre-processing image
-    img = image.load_img(image_path, target_size = (299, 299))
+    img = request.files['file']
+    img = image.load_img(img, target_size = (299, 299))
     x = np.expand_dims(image.img_to_array(img), axis=0)
     x = preprocess_input(x)
     x = x.copy(order="C")

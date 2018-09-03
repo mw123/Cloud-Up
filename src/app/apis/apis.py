@@ -19,6 +19,7 @@ from app import app
 from app.apis.InceptionV3 import run_inceptionV3
 
 import os
+from PIL import Image
 
 mysql = MySQL(app)
 
@@ -129,13 +130,24 @@ def register():
 def user_home():
     if request.method == 'POST':
         user_image = request.files['file']
-        filename = user_image.filename
+        
+        # resize image
+        base_height = 300
+        img = Image.open(user_image)
+        hpercent = (base_height/float(img.size[1]))
+        wsize = int(float(img.size[0]) * hpercent)
+        resized_image = img.resize((wsize, base_height), Image.ANTIALIAS)
+
+        # save image as png
+        filename, ext = os.path.splitext(user_image.filename)
+        filename = filename + ".png"
         if not os.path.isdir(IMG_CACHE):
             os.mkdir(IMG_CACHE)
         image_path = "/".join([IMG_CACHE, filename])
-        user_image.save(image_path)
+        resized_image.save(image_path)
 
-        results = run_inceptionV3(image_path)
+        # classify image
+        results = run_inceptionV3()
         #app.logger.info('inference: '+str(results['prediction']))
 
         return render_template('inference.html', image = filename, results = results)
