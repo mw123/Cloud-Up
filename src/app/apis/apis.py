@@ -140,7 +140,7 @@ def user_home():
 
         # save image as png
         filename, ext = os.path.splitext(user_image.filename)
-        filename = filename + ".png"
+        filename = filename + ".jpg"
         if not os.path.isdir(IMG_CACHE):
             os.mkdir(IMG_CACHE)
         image_path = "/".join([IMG_CACHE, filename])
