@@ -1,10 +1,10 @@
 # Cloud-Up: Scalable and Secure Infrastructure for Transfer Learning as a Service
-Checkout my product in this [link.](http://cloud-up-insight.com/) This web app lets you to train your own image classifiers!
+Check out my product in this [link](https://1drv.ms/f/s!AmrtnAcSGR3oiKBX6NLq1YwmFLSzYw) and visit the [slides](https://docs.google.com/presentation/d/1svaXXbzNHJ4pErcu5d19rBu0Hn1Xh79UVCnyU2Jpo1k/edit?usp=sharing) for more details. This web app lets you to train your own image classifiers!
 
 ### Purpose
-The old Michaniki project runs on local host machine. This can be a limiting factor for users who don't have access to GPU enabled computer, thus will suffer from long training times. In this repo, I enable GPU computing on AWS for training classification models. I also deploy a scalable infrastructure to provide multi-user service platform.
+The old Michaniki project runs on local host machine. This can be a limiting factor for users who don't have access to GPU enabled computer, thus will suffer from long training times. In this repo, I enable GPU computing on AWS for training classification models. I also automatically deploy a scalable infrastructure on a single click to provide multi-user services.
 
-This platform is intended for computer vision research and personal use. Transfer learning in image classification has become a standard practice, and a web platform that automates the task can benefit users who do not have computing resource or domain knowledge. 
+This platform is intended for anyone who needs image classification. Transfer learning in image classification has become a standard practice, and a web platform that automates the task can benefit users who do not have computing resource or domain knowledge. 
 
 ### Web App Architecture
 ![](img/architecture.png)
